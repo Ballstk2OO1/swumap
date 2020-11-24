@@ -58,6 +58,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private let firstnameField: UITextField = {
         let field = UITextField()
+        field.textColor = .black
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
@@ -73,6 +74,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private let lastnameField: UITextField = {
         let field = UITextField()
+        field.textColor = .black
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue

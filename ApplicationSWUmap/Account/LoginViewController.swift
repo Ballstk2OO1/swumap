@@ -29,13 +29,15 @@ class LoginViewController: UIViewController {
     
     private let emailField: UITextField = {
         let field = UITextField()
+        field.textColor = .black
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         field.layer.cornerRadius = 8
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "email address..."
+//        field.placeholder = "email address..."
+        field.attributedPlaceholder = NSAttributedString(string: "email address...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .white
@@ -44,6 +46,7 @@ class LoginViewController: UIViewController {
     
     private let passwordField: UITextField = {
         let field = UITextField()
+        field.textColor = .black
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .done
@@ -51,6 +54,7 @@ class LoginViewController: UIViewController {
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "password..."
+        field.attributedPlaceholder = NSAttributedString(string: "password...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .white

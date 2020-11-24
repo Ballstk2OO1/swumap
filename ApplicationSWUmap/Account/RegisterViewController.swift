@@ -29,13 +29,15 @@ class RegisterViewController: UIViewController {
     
     private let firstNameField: UITextField = {
         let field = UITextField()
+        field.textColor = .black
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         field.layer.cornerRadius = 8
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "first name..."
+//        field.placeholder = "first name..."
+        field.attributedPlaceholder = NSAttributedString(string: "first name...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .white
@@ -44,13 +46,15 @@ class RegisterViewController: UIViewController {
     
     private let lastNameField: UITextField = {
         let field = UITextField()
+        field.textColor = .black
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         field.layer.cornerRadius = 8
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "last name..."
+//        field.placeholder = "last name..."
+        field.attributedPlaceholder = NSAttributedString(string: "last name...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .white
@@ -59,13 +63,15 @@ class RegisterViewController: UIViewController {
     
     private let emailField: UITextField = {
         let field = UITextField()
+        field.textColor = .black
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         field.layer.cornerRadius = 8
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "email address..."
+//        field.placeholder = "email address..."
+        field.attributedPlaceholder = NSAttributedString(string: "email address...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .white
@@ -74,13 +80,15 @@ class RegisterViewController: UIViewController {
     
     private let passwordField: UITextField = {
         let field = UITextField()
+        field.textColor = .black
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .done
         field.layer.cornerRadius = 8
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "password..."
+//        field.placeholder = "password..."
+        field.attributedPlaceholder = NSAttributedString(string: "password...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .white
