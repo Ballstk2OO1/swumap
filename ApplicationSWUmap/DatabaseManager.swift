@@ -436,10 +436,12 @@ extension DatabaseManager {
     /// get all message for a given conversation
     public func getAllMessagesForConversation(with id: String, completion: @escaping(Result<[Message],Error>) -> Void) {
         database.child("\(id)/message").observe(.value, with: { snapshot in
+            print("conversation id ############ \(id)")
             guard let value = snapshot.value as? [[String: Any]] else {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }
+            print("####### value \(value) #########")
             let messages: [Message] = value.compactMap({ dictionary in
                 guard let name = dictionary["name"] as? String,
                       let isRead = dictionary["is_read"] as? Bool,
@@ -449,10 +451,18 @@ extension DatabaseManager {
                       let type = dictionary["type"] as? String,
                       let dateString = dictionary["date"] as? String,
                       let date = ChatViewController.dateFormatter.date(from: dateString)
-                else { return nil }
+                else {
+                    print("#########fail to get compact map##########")
+                    return nil
+                }
                 let sender = Sender(senderId: senderEmail, displayName: name)
                 return Message(sender: sender, messageId: messageID, sentDate: date, kind: .text(content))
             })
+//            for child in snapshot.children {
+//
+//            }
+//            let sender = Sender(senderId: "email", displayName: "name")
+//            let messages = Message(sender: sender, messageId: "messageID", sentDate: "date", kind: .text("content"))
             completion(.success(messages))
         })
     }
@@ -470,6 +480,7 @@ extension DatabaseManager {
                 return
             }
             let messageDate = newMessage.sentDate
+            print("SEND MESSAGE %%%%%%%%%%%%%% \(messageDate)")
             let dateString = ChatViewController.dateFormatter.string(from: messageDate)
             var messageRaw = ""
             switch newMessage.kind {

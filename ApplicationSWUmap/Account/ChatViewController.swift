@@ -56,6 +56,7 @@ class ChatViewController: MessagesViewController {
         formatter.dateStyle = .medium
         formatter.timeStyle = .long
         formatter.locale = .current
+        formatter.dateFormat = "MMM dd', 'yyyy' at 'HH:mm:ss O"
         return formatter
     }()
     
@@ -118,7 +119,10 @@ class ChatViewController: MessagesViewController {
             switch result {
             case.success(let messages):
                 self?.isNewConversation = false
-                guard !messages.isEmpty else { return }
+                guard !messages.isEmpty else {
+                    return
+                }
+                print("\n\(messages)\n")
                 self?.messages = messages
                 DispatchQueue.main.async {
                     self?.messagesCollectionView.reloadData()
@@ -143,12 +147,14 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
               let messageId = createMessageID() else { return }
         
         print("sending...\(text)")
+        print("Date########\n",Date())
         let message = Message(sender: selfSender,
                               messageId: messageId,
                               sentDate: Date(),
                               kind: .text(text))
         if isNewConversation {
             print("new conver create")
+            self.messageInputBar.inputTextView.text = nil
             DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { [weak self] success in
                 if success {
                     print("message sent")
@@ -156,7 +162,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                     self?.conversationId = newConversationId
                     self?.listenForMessages(id: newConversationId, shouldScrollToBottom: true)
                     self?.isNewConversation = false
-                    self?.messageInputBar.inputTextView.text = nil
                 }
                 else {
                     print("fail to sent")
@@ -165,9 +170,9 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         }
         else {
             guard let conversationId = conversationId, let name = self.title else { return }
+            self.messageInputBar.inputTextView.text = nil
             DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: otherUserEmail, name: name, newMessage: message, completion: { success in
                 if success {
-                    self.messageInputBar.inputTextView.text = nil
                     print("message sent")
                 }
                 else {
@@ -180,8 +185,15 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     private func createMessageID() -> String? {
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else { return nil }
         let safeCurrentEmail = DatabaseManager.dbEmail(emailAdress: currentUserEmail)
-        let dateString = Self.dateFormatter.string(from: Date())
-        let newIdentifier = "\(otherUserEmail)_\(safeCurrentEmail)_\(dateString)"
+        let dateAsString = Self.dateFormatter.string(from: Date())
+        print("create message id ^^^^^^^^^ \(dateAsString)")
+        
+//        let df = DateFormatter()
+//        df.dateFormat = "MMM dd', 'yyyy' at 'hh:mm:ss a 'GMT+7'"
+//        let date = df.date(from: dateAsString)
+//        df.dateFormat = "MMM dd', 'yyyy' at 'HH:mm:ss 'GMT+7'"
+//        let dateString = df.string(from: date!)//24 hours
+        let newIdentifier = "\(otherUserEmail)_\(safeCurrentEmail)_\(dateAsString)"
         print("create messageID",newIdentifier)
         return newIdentifier
     }
