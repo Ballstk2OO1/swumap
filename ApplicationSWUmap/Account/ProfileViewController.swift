@@ -225,9 +225,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             alertInformationError()
             return
         }
+        let firstNameNospace = firstName.replacingOccurrences(of: " ", with: "")
+        let lastNameNospace = lastName.replacingOccurrences(of: " ", with: "")
         UserDefaults.standard.removeObject(forKey: "name")
-        UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
-        DatabaseManager.shared.userEditing(with: UserInfo(firstName: firstName, lastName: lastName, emailAdress: email))
+        UserDefaults.standard.set("\(firstNameNospace) \(lastNameNospace)", forKey: "name")
+        DatabaseManager.shared.userEditing(with: UserInfo(firstName: firstNameNospace, lastName: lastNameNospace, emailAdress: email))
         alertUpdateSuccessful()
     }
     

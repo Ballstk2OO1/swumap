@@ -208,13 +208,28 @@ class RegisterViewController: UIViewController {
             }
             
             // store data
-            let userinfo = UserInfo(firstName: firstName, lastName: lastName, emailAdress: email)
+            let firstNameNospace = firstName.replacingOccurrences(of: " ", with: "")
+            let lastNameNospace = lastName.replacingOccurrences(of: " ", with: "")
+            let userinfo = UserInfo(firstName: firstNameNospace, lastName: lastNameNospace, emailAdress: email)
             DatabaseManager.shared.insertUser(with: userinfo, completion: {sucess in 
                 if sucess {
                     print("create user in database")
                 }
                 else {
                     print("fail to create user in database")
+                }
+            })
+            let safeEmail = DatabaseManager.dbEmail(emailAdress: email)
+            DatabaseManager.shared.getDataFor(path: safeEmail, completion: { result in
+                switch result {
+                case.success(let data):
+                    guard let userData = data as? [String: Any],
+                        let firstName = userData["first_name"] as? String,
+                        let lastName = userData["last_name"] as? String else { return }
+                    UserDefaults.standard.removeObject(forKey: "name")
+                    UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
+                case.failure(let error):
+                    print("fail to read data with error \(error)")
                 }
             })
             UserDefaults.standard.removeObject(forKey: "email")
