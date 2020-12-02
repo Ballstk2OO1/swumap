@@ -49,8 +49,8 @@ final class DatabaseManager {
 extension DatabaseManager {
     func insertUser(with user: UserInfo, completion: @escaping (Bool) -> Void) {
         database.child(user.dbEmail).setValue([
-            "first_name":user.firstName,
-            "last_name":user.lastName
+            "first_name" : user.firstName,
+            "last_name" : user.lastName
         ], withCompletionBlock: {error, _ in
             guard error == nil else {
                 print("fail to write to Database")

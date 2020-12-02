@@ -493,15 +493,6 @@ class ViewController: UIViewController {
         let myView = UIView(frame: navigationController?.navigationBar.frame ?? .zero)
         navigationController?.navigationBar.topItem?.titleView = myView
         
-//        let titleLabel : UILabel = {
-//            let titleLabel = UILabel()
-//            titleLabel.frame = CGRect(x: 158, y: 8, width: UIScreen.main.bounds.size.width-28, height: 30)
-//            titleLabel.textColor = UIColor.black
-//            titleLabel.text = "SWU map"
-//            return titleLabel
-//        }()
-//        myView.addSubview(titleLabel)
-        
         let imageButton : UIButton = {
             let imageButton = UIButton()
             imageButton.layer.frame = CGRect(x: 5, y: 8, width: 28, height: 28)
@@ -522,7 +513,6 @@ class ViewController: UIViewController {
         filtermenu.bottomOffset = CGPoint(x: 0, y: 100)
         filtermenu.width = 250
         filtermenu.direction = .top
-        
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTopItem))
         gesture.numberOfTapsRequired = 1

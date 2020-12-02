@@ -93,7 +93,7 @@ class NewConversationViewController: UIViewController, UITableViewDelegate, UITa
 
 extension NewConversationViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text,!text.replacingOccurrences(of: " ", with: "").isEmpty else { return }
+        guard let text = searchBar.text?.replacingOccurrences(of: " ", with: ""),!text.replacingOccurrences(of: " ", with: "").isEmpty else { return }
         searchBar.resignFirstResponder()
         
         result.removeAll()

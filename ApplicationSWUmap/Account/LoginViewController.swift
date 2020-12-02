@@ -132,8 +132,7 @@ class LoginViewController: UIViewController {
         guard let email = emailField.text,
               let password = passwordField.text,
               !email.isEmpty,
-              !password.isEmpty,
-              password.count >= 6 else {
+              !password.isEmpty else {
             DispatchQueue.main.async {
                 self.spinner.dismiss()
             }
@@ -149,10 +148,9 @@ class LoginViewController: UIViewController {
             return
         }
         
-        
         // sign in
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { authResult, error in
-            guard let result = authResult,error == nil else {
+            guard let result = authResult, error == nil else {
                 DispatchQueue.main.async {
                     self.spinner.dismiss()
                 }
@@ -182,6 +180,7 @@ class LoginViewController: UIViewController {
             
             UserDefaults.standard.removeObject(forKey: "email")
             UserDefaults.standard.setValue(email, forKey: "email")
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "Navigation")
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
@@ -228,4 +227,3 @@ extension LoginViewController: UITextFieldDelegate {
     }
     
 }
-

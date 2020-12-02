@@ -166,12 +166,7 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func registerButtonTapped() {
-        
-        firstNameField.resignFirstResponder()
-        lastNameField.resignFirstResponder()
-        emailField.resignFirstResponder()
-        passwordField.resignFirstResponder()
-        
+
         guard let firstName = firstNameField.text,
               let lastName = lastNameField.text,
               let email = emailField.text,
@@ -200,6 +195,9 @@ class RegisterViewController: UIViewController {
         FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { authResult, error in
             guard authResult != nil, error == nil else {
                 print("fail to create user in database")
+                DispatchQueue.main.async {
+                    self.spinner.dismiss()
+                }
                 self.alertAlreadyExistError()
                 return
             }
@@ -219,6 +217,7 @@ class RegisterViewController: UIViewController {
                     print("fail to create user in database")
                 }
             })
+            // เก็บไว้ทำ chat
             let safeEmail = DatabaseManager.dbEmail(emailAdress: email)
             DatabaseManager.shared.getDataFor(path: safeEmail, completion: { result in
                 switch result {
@@ -232,6 +231,7 @@ class RegisterViewController: UIViewController {
                     print("fail to read data with error \(error)")
                 }
             })
+            // เก็บค่าไว้ใช้หน้า profile
             UserDefaults.standard.removeObject(forKey: "email")
             UserDefaults.standard.setValue(email, forKey: "email")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

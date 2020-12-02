@@ -137,9 +137,9 @@
 				A802E2542524784500793E58 /* LoginViewController.swift */,
 				A8D95C162524A80A00A8D5FA /* RegisterViewController.swift */,
 				A80DFC0F2544756E008488A7 /* ConversationViewController.swift */,
+				A8D414C02566D46F00B85568 /* ConversationTableViewCell.swift */,
 				A80DFECE2544D7BC008488A7 /* NewConversationViewController.swift */,
 				A80DFEC12544B242008488A7 /* ChatViewController.swift */,
-				A8D414C02566D46F00B85568 /* ConversationTableViewCell.swift */,
 				A80DFEC62544BC13008488A7 /* ProfileViewController.swift */,
 				A80F2D0F256835E800C748E1 /* Extension.swift */,
 			);
