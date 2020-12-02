@@ -241,8 +241,6 @@ class RegisterViewController: UIViewController {
         })
     }
     
-    
-    
     func alertInformationError() {
         let alert = UIAlertController(title: "Error!",
                                       message: "Please enter all information",
