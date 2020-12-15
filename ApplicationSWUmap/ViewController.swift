@@ -34,11 +34,6 @@ class ViewController: UIViewController {
     
     var images = [String]()
     
-    //    let barAppearance = UINavigationBar.appearance()
-    //        barAppearance.barTintColor = UIColor.blue
-    //        barAppearance.tintColor = UIColor.white
-    //        barAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-    
     @IBOutlet weak var filtermenuBtn: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
